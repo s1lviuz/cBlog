@@ -1,0 +1,29 @@
+{% extends "blog_app/baseLogado.html" %}{% load static %}
+{% block titulo %}Minha Conta{% endblock %}
+
+{% block main %}
+<form>
+    <h1 class="h3 mb-4 pt-3 fw-normal">Alterar dados pessoais</h1>
+
+    <div class="form-floating mb-2">
+      <input type="first-name" class="form-control" id="floatingInput" placeholder="Nome">
+      <label for="floatingInput">Nome</label>
+    </div>
+    <div class="form-floating mb-2">
+        <input type="last-name" class="form-control" id="floatingInput" placeholder="Sobrenome">
+        <label for="floatingInput">Sobrenome</label>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="username" class="form-control" id="floatingInput" placeholder="Usuário">
+      <label for="floatingInput">Usuário</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Senha">
+        <label for="floatingPassword">Senha</label>
+    </div>
+
+    <div class="mb-3"></div>
+    
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Salvar</button>
+</form>
+{% endblock %}

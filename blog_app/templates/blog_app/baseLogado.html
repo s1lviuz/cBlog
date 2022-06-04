@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    {% load static %}
+  </head>
+
+<body>
+
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <p class="d-flex align-items-center col-md-3 mb-2 mb-md-0">
+          <img class="img-fluid col-md-3 ms-md-auto" src="{% static 'blog_app/logo_icon.svg' %}"></img>
+        </p>
+  
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="../home/" class="nav-link px-2 link-secondary">Home</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Colaboradores</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Ajuda</a></li>
+        </ul>
+  
+        <div class="col-md-3 ms-md-auto">
+          <a href="../minhaConta/" class="text-decoration-none"><button type="button" class="btn btn-dark">Minha Conta</button></a>
+          <a href="../" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Sair</button></a>
+        </div>
+      </header>
+      
+      <main class="container">
+        <div class="col-md-6 offset-md-3">
+        {% block main %}{% endblock %}
+        </div>
+    </main>
+
+      
+
+      <footer class="py-3 my-4">
+        <p class="text-center text-muted">© 2022 cBlog, Inc</p>
+      </footer>
+
+</body>
+
+</html>
