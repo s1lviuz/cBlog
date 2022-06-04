@@ -9,4 +9,5 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('titulo',)}
 
 
+
 admin.site.register(Post, PostAdmin)
