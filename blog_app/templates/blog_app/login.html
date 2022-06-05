@@ -3,22 +3,31 @@
 {% block titulo %}Entrar{% endblock %}
 
 {% block main %}
-<form>
+{% if messages %}
+<ul style="list-style-type:none;" class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form action="entrar/" method="post">
+  {% csrf_token %}
+
     <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
     <h1 class="h3 mb-4 fw-normal">Conecte-se</h1>
 
     <div class="form-floating mb-1">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Usuário</label>
+      <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuário">
+      <label for="id_username">Usuário</label>
     </div>
     <div class="form-floating mb-1">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Senha</label>
+      <input type="password" class="form-control" id="id_password" name="password" placeholder="Senha">
+      <label for="id_password">Senha</label>
     </div>
 
     <div class="mb-3"></div>
     
-    <a href="home/"><button class="w-100 btn btn-lg btn-dark" type="button">Entrar</button></a>
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Entrar</button>
     <p class="mt-5 mb-3">Novo por aqui? <a href="cadastro/" class="text-decoration-none">Registre-se</a></p>
     <p class="mt-5 mb-3 text-muted">© 2022 cBlog, Inc</p>
 </form>

@@ -15,13 +15,18 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
+
 from blog_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='login'),
-    path('home/', views.home, name="Home"),
+    path('', views.index, name='index'),
+    path('entrar/', views.entrar, name="Login"),
+    path('home/', views.home, name="home"),
     path('cadastro/', views.cadastro, name="Cadastro"),
+    path('cadastro/cadastrar/', views.cadastrar, name="Cadastrar"),
+    path('sair/', views.sair, name="sair"),
     path('minhaConta/', views.minhaconta, name="Minha Conta" ),
+    path('minhaConta/alterar/', views.alterar, name="Alterar Conta" ),
 ]

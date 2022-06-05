@@ -5,4 +5,4 @@ Versão de testes----------
 
 #notas da versão
 
-implementado Custom User para fuituras adições de campos extras (Nome Completo)
+implementado Autenticação do Custom User 🥳🥳🥳
