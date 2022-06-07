@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import generic
 
-from user_app.forms import UserCreationForm, UserLogInForm, UserChangeForm
+from user_app.forms import UserChangeForm, UserCreationForm, UserLogInForm
 
 from .models import Post
 
@@ -21,38 +21,43 @@ class PostDetail(generic.DetailView):
 
 
 def cadastrar(request):
+    dados={}
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        erros = form.check()
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, 'Usuário criado com Sucesso!')
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('Sucesso'))
+        else:
+            dados['form'] = form
+            messages.error(request, erros)
+            return render(request, 'blog_app/cadastro.html', dados)
     else:
-        form = UserCreationForm()   
-    return render(request, 'blog_app/cadastro.html', {'form': form})
+        messages.error(request, erros)
+        dados = UserCreationForm()
+        return render(request, 'blog_app/cadastro.html', dados)
 
 
 def entrar(request):
-    if request.user.is_authenticated:
-        return redirect('home')
     if request.method == "POST":
         form = UserLogInForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
-                messages.success(request, 'Sucesso!')
-                return HttpResponseRedirect(reverse('home'))
-            else:
-                messages.error(request, 'Usuario ou senha incorretos')
+        erros = form.check()
+        if erros == 0:
+            if form.is_valid():
+                username = form.cleaned_data["username"]
+                password = form.cleaned_data["password"]
+                user = authenticate(username=username, password=password)
+                if user:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('index'))  
+                messages.error(request, 'login incorreto')
+        else:
+            messages.error(request, erros)                        
     else:
-        form = UserLogInForm()
-    messages.error(request, 'Usuario ou senha incorretos')
-    return render(request, 'blog_app/minhaConta.html',
-           {'form': form})
+        pass
+    return redirect('index')
 
 def alterar(request):
     if request.method == 'POST':
@@ -72,16 +77,26 @@ def sair(request):
     return HttpResponseRedirect(reverse('index'))
 
 def index(request):
-    return render(request, 'blog_app/login.html',
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        return render(request, 'blog_app/login.html',
            {})
 
 def home(request):
     return render(request, 'blog_app/pubPerfil.html',
            {})
 
-def cadastro(request):
+def cadastro(request,):
     return render(request, 'blog_app/cadastro.html',
            {})
+
+def cadastroSucesso(request):
+    if request.user.is_authenticated:
+        return render(request, 'blog_app/cadastroSucesso.html',
+           {})
+    else:
+        raise Http404
 
 def minhaconta(request):
     form = UserChangeForm(instance=request.user)

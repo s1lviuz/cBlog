@@ -26,6 +26,7 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('cadastro/', views.cadastro, name="Cadastro"),
     path('cadastro/cadastrar/', views.cadastrar, name="Cadastrar"),
+    path('cadastro/sucesso/', views.cadastroSucesso, name="Sucesso"),
     path('sair/', views.sair, name="sair"),
     path('minhaConta/', views.minhaconta, name="Minha Conta" ),
     path('minhaConta/alterar/', views.alterar, name="Alterar Conta" ),

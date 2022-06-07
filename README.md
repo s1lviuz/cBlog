@@ -5,4 +5,9 @@ Versão de testes----------
 
 #notas da versão
 
-implementado Autenticação do Custom User 🥳🥳🥳
+Telas login e cadastro funcionais, redirecionamentos de url configurados para as mesmas, mensagens sobre o formulário adicionadas
+🚀🚀🚀🚀🚀
+
+Próximas Versões:
+    Implementar Post e comentários para o usuário logado
+

@@ -10,3 +10,4 @@ class UserAdmin(auth_admin.UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     model = User
+    list_display = ('username', 'first_name', 'last_name','is_staff')

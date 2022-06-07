@@ -3,36 +3,42 @@
 {% block titulo %}Cadastrar{% endblock %}
 
 {% block main %}
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-<form action="cadastrar/" method="post">
+<form action="{% url 'Cadastrar' %}" method="post">
   {% csrf_token %}
   
     <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
     <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
 
     <div class="form-floating mb-1">
-      <input type="text" class="form-control" id="id_first_name" name="first_name" placeholder="Nome">
+      <input type="text" class="form-control" id="id_first_name" name="first_name" placeholder="Nome" value="{{ form.first_name.value }}">
       <label for="id_first_name">Nome</label>
     </div>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     <div class="form-floating mb-1">
-        <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuário">
+      <input type="text" class="form-control" id="id_last_name" name="last_name" placeholder="Sobrenome" value="{{ form.last_name.value }}">
+      <label for="id_last_name">Sobrenome</label>
+    </div>
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="id_username" name="username" placeholder="Usuário" value="{{ form.username.value }}">
         <label for="id_username">Usuário</label>
     </div>
+    {{ form.username.errors }}
     <div class="form-floating mb-1">
       <input type="password" class="form-control" id="id_password1" name="password1" placeholder="Senha">
       <label for="id_password1">Senha</label>
     </div>
+    {{ form.password1.errors }}
     <div class="form-floating">
         <input type="password" class="form-control" id="id_password2" name="password2" placeholder="Confirmar Senha">
         <label for="id_password2">Confirmação de Senha</label>
     </div>
-
+    {{ form.password2.errors }}
     <div class="mb-3"></div>
     
     <button class="w-100 btn btn-lg btn-dark" type="submit">Cadastrar</button>

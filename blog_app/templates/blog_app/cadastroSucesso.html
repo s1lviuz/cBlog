@@ -1,0 +1,23 @@
+{% extends "blog_app/baseLogin.html" %}{% load static %}
+
+{% block titulo %}Entrar{% endblock %}
+
+{% block main %}
+<div>
+
+  <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
+  
+  {% if messages %}
+  <ul style="list-style-type:none;" class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="mb-3 mt-4"></div>
+    
+  <a href="{% url 'Login' %}"><button class="w-100 btn btn-lg btn-dark">Acessar Perfil</button></a>
+  <p class="mt-5 mb-3 text-muted">© 2022 cBlog, Inc</p>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@
     {% endfor %}
 </ul>
 {% endif %}
-<form action="entrar/" method="post">
+<form action="{% url 'Login' %}" method="post">
   {% csrf_token %}
 
     <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
