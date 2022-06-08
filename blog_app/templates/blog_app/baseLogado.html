@@ -17,14 +17,25 @@
         </p>
   
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="../home/" class="nav-link px-2 link-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Colaboradores</a></li>
+          <li><a href="{% url 'home' %}" class="nav-link px-2 link-dark">Home</a></li>
+          <li class="nav-item dropdown px-2 link-dark">
+            <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Colaboradores
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              
+              {% for i in colaboradores %}
+              <li><a class="dropdown-item" href="{% url 'Perfil Colaborador' username=i.get_username %}">{{i.get_full_name}}</a></li>
+              {% endfor %}
+
+            </ul>
+          </li>
           <li><a href="#" class="nav-link px-2 link-dark">Ajuda</a></li>
         </ul>
   
         <div class="col-md-3 ms-md-auto">
-          <a href="../minhaConta/" class="text-decoration-none"><button type="button" class="btn btn-dark">Minha Conta</button></a>
-          <a href="../sair/" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Sair</button></a>
+          <a href="{% url 'Minha Conta' %}" class="text-decoration-none"><button type="button" class="btn btn-dark">Minha Conta</button></a>
+          <a href="{% url 'sair' %}" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Sair</button></a>
         </div>
       </header>
       
@@ -36,7 +47,8 @@
 
       
 
-      <footer class="py-3 my-4">
+      <footer style="position: absolute; bottom: 0; width: 100%;" >
+        <hr>
         <p class="text-center text-muted">© 2022 cBlog, Inc</p>
       </footer>
 

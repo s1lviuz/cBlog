@@ -2,13 +2,14 @@
 {% block titulo %}Minhas Publicações{% endblock %}
 
 {% block main %}
+{% if posts %}
 <h3 class="pb-4 mb-4 fst-italic border-bottom">
-  Publicações de {nome do Usuário}
+  Publicações de {{posts.first.autor.get_full_name}}
 </h3>
-
+{% for post in posts %}
 <article class="blog-post">
-  <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
-  <p class="blog-post-meta"><small>{data} por <a href="#">{autor}</a></small></p>
+  <p>{{ post.conteudo }}</p>
+  <p class="blog-post-meta"><small>{{ post.criado_em }}</small></p>
   <p>
     <button class="btn btn-secondary shadow-none btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       Comentar
@@ -21,4 +22,10 @@
   </div>
   <hr>
 </article>
+{% endfor %}
+{% else %}
+<article class="blog-post">
+  <h6>Este Usuário não publicou nenhum post ainda.</h6>
+</article>
+{% endif %}
 {% endblock %}

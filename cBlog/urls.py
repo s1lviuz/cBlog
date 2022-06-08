@@ -22,12 +22,15 @@ from blog_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('entrar/', views.entrar, name="Login"),
-    path('home/', views.home, name="home"),
     path('cadastro/', views.cadastro, name="Cadastro"),
     path('cadastro/cadastrar/', views.cadastrar, name="Cadastrar"),
     path('cadastro/sucesso/', views.cadastroSucesso, name="Sucesso"),
-    path('sair/', views.sair, name="sair"),
+    path('entrar/', views.entrar, name="Login"),
+    path('home/', views.home, name="home"),
     path('minhaConta/', views.minhaconta, name="Minha Conta" ),
     path('minhaConta/alterar/', views.alterar, name="Alterar Conta" ),
+    path('sair/', views.sair, name="sair"),
+    path('colaborador/<str:username>/', views.perfilColaborador, name="Perfil Colaborador"),
+    path('publicar/', views.publicarPost, name="Publicar post"),
+
 ]

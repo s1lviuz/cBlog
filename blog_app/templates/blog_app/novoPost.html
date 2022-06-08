@@ -1,0 +1,25 @@
+{% extends "blog_app/baseLogado.html" %}
+{% block titulo %}Minhas Publicações{% endblock %}
+
+{% block main %}
+
+<h3 class=" mb-2 fst-italic">
+Novo Post
+</h3>
+
+<form action="{% url 'Publicar post' %}" method="post">
+
+  <div class="mb-3">
+    <label for="conteudo" class="form-label" id="id_conteudo" name="conteudo"></label>
+    <textarea class="form-control" id="id_conteudo" name="conteudo" rows="4"></textarea>
+  </div>
+
+  <p style="text-align:right;">
+    <button class="btn btn-secondary shadow-none btn-sm"  type="submit">
+    Publicar
+    </button>
+  </p>
+  
+</form>
+<hr>
+{% endblock %}

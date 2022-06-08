@@ -1,0 +1,42 @@
+{% extends "blog_app/baseLogado.html" %}
+{% block titulo %}Minhas Publicações{% endblock %}
+
+{% block main %}
+<div class="collapse" id="collapseExample">
+  <form action="{% url 'Publicar post' %}" method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_conteudo" class="form-label"></label>
+      <textarea maxlength="200" class="form-control" id="id_conteudo" name="conteudo" rows="4"></textarea>
+    </div>
+  
+    <p style="text-align:right;">
+      <button class="btn btn-secondary shadow-none btn-sm"  type="submit" style="margin-right:6%;">
+      Publicar
+      </button>
+    </p>
+  </form>
+</div>
+<h3 class=" mb-3 fst-italic">
+  Minhas publicações
+  <button class="btn btn-secondary shadow-none btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="float: right;margin-right:6%;">
+    Novo Post
+  </button>
+</h3>
+<hr>
+{% if meusposts %}
+{% for post in meusposts %}
+<article class="blog-post">
+  <p>{{ post.conteudo }}</p>
+  <p class="blog-post-meta"><small>{{ post.criado_em }}</small></p>
+  <hr>
+</article>
+{% endfor %}
+{% endif %}
+{% if not meusposts %}
+<article class="blog-post">
+  <h6>Você não publicou nenhum post ainda.</h6>
+</article>
+{% endif %}
+{% endblock %}
