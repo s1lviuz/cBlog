@@ -1,5 +1,5 @@
 # cBlog
-Um simples blog para empresas
+Um simples blog para uso aberto
 
 Versão Beta 1.0
 
@@ -8,7 +8,7 @@ Versão Beta 1.0
 Toda estrutura de views e forms refeita do zero priorizando usar/extender os recursos do Framework Django.
 
 # Recursos da versão
-    
+
 * Cadastro e Login de Usuários
 * Autenticação de Usuários
 * Criar Post 
