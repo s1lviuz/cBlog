@@ -1,15 +1,23 @@
 # cBlog
 Um simples blog para empresas
 
-Versão de testes----------
+Versão Beta 1.0
 
 #notas da versão
 
-Telas login e cadastro funcionais, redirecionamentos de url configurados para as mesmas, mensagens sobre o formulário adicionadas
-Usuário já pode cadastrar Post em sua Home
-🚀🚀🚀🚀🚀
+Toda estrutura de views e forms refeita do zero priorizando usar/extender os recursos do Framework Django.
 
-Próximas Versões:
-    Implementar Comentários para o usuário logado e melhores design nas paginas HTMl
+# Recursos da versão
     
+* Cadastro e Login de Usuários
+* Autenticação de Usuários
+* Criar Post 
+* Criar Comentario 
+* Seguir outros Usuários
+* Home Page
+* Página de Perfil
+* Detalhes do Post
 
+# Observações
+
+Esta é uma aplicação Web que requer o Framework Django para ser executada.

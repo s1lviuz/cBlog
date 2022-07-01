@@ -7,50 +7,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     {% load static %}
-  </head>
+</head>
 
-<body>
+<body style="position:relative; min-height: 100vh; padding-bottom: 5%; ">
 
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0 border-bottom">
         <p class="d-flex align-items-center col-md-3 mb-2 mb-md-0">
           <img class="img-fluid col-md-3 ms-md-auto" src="{% static 'blog_app/logo_icon.svg' %}"></img>
         </p>
   
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'home' %}" class="nav-link px-2 link-dark">Home</a></li>
-          <li class="nav-item dropdown px-2 link-dark">
-            <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Colaboradores
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              
-              {% for i in colaboradores %}
-              <li><a class="dropdown-item" href="{% url 'Perfil Colaborador' username=i.get_username %}">{{i.get_full_name}}</a></li>
-              {% endfor %}
-
-            </ul>
-          </li>
-          <li><a href="#" class="nav-link px-2 link-dark">Ajuda</a></li>
+          <li><a href="{% url 'home' %}" class="nav-link px-2 link-dark">Inicio</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'perfil_usuario' user.get_username %}" class="nav-link px-2 link-dark">Perfil</a></li>
+          {% endif %}
         </ul>
   
         <div class="col-md-3 ms-md-auto">
-          <a href="{% url 'Minha Conta' %}" class="text-decoration-none"><button type="button" class="btn btn-dark">Minha Conta</button></a>
-          <a href="{% url 'sair' %}" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Sair</button></a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'publicar' %}" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Publicar</button></a>
+            <a href="{% url 'logout' %}" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Sair</button></a>
+          {% else %}
+            <a href="{% url 'login' %}" class="text-decoration-none"><button type="button" class="btn btn-outline-dark">Entrar</button></a>
+          {% endif %}
         </div>
-      </header>
+    </header>
       
       <main class="container">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-8 offset-md-2" style=" border-left: 0.2px solid rgba(0, 0, 0, 0.2) ; border-right: 0.2px solid rgba(0, 0, 0, 0.2) ;">
         {% block main %}{% endblock %}
         </div>
-    </main>
-
+      </main>
+    <br>
       
 
-      <footer style="position: absolute; bottom: 0; width: 100%;" >
-        <hr>
-        <p class="text-center text-muted">© 2022 cBlog, Inc</p>
-      </footer>
+    <footer style="position:absolute; bottom: 0; width: 100%;" >
+      <hr>
+      <p class="text-center text-muted">© 2022 cBlog, Inc</p>
+    </footer>
 
 </body>
 

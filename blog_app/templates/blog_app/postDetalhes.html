@@ -1,0 +1,76 @@
+{% extends "blog_app/baseLogado.html" %}
+{% block titulo %}Post de {{ post.autor.get_full_name }} {% endblock %}
+
+{% block main %}
+
+<article class="blog-post pt-3">
+
+  <a href="{% url 'perfil_usuario' post.autor.get_username %}" style="text-decoration: none; color: black;">
+    <p class="blog-post-meta" style="display:inline-block; margin-left: 1%; margin-bottom: 1%;">@<strong>{{ post.autor.get_username }}</strong></p>
+  </a>
+  <p class="blog-post-meta pt-1" style="display: inline-block; margin-bottom: 1%; margin-right: 1%;">· {{ post.autor.get_full_name }}</p>
+  <p class="blog-post-meta" style="float: right; font-size:smaller; margin-bottom: 1%; margin-right: 1%;">· <small>{{ post.criado_em }}</small></p>
+  <p style="margin-left:4%; margin-right: 4%; padding-bottom: 1%; opacity: 0.87;">{{ post.conteudo }}</p>
+  <hr style="margin-bottom: 8px; margin-bottom: 8px;">
+
+  {% if object_list %}
+    <p style="margin-left: 1%;"><small>Comentarios 💬</small></p>
+    <div style="margin-left: 6%; border-left: 0.2px solid rgba(0, 0, 0, 0.2) ;">
+
+      {% for comentario in object_list %}
+        <a href="{% url 'perfil_usuario' comentario.autor.get_username %}" style="text-decoration: none; color: black;">
+          <p class="blog-post-meta" style="display:inline-block; margin-left: 1%; margin-bottom: 1%;">@<strong>{{ comentario.autor.get_username }}</strong></p>
+        </a>
+        <p class="blog-post-meta pt-1" style="display: inline-block; margin-bottom: 1%; margin-right: 1%;">· {{ comentario.autor.get_full_name }}</p>
+        <p class="blog-post-meta" style="float: right; font-size:smaller; margin-bottom: 1%; margin-right: 1%;">· <small>{{ comentario.criado_em }}</small></p>
+        <p style="margin-left:4%; margin-right: 4%; padding-bottom: 1%; opacity: 0.87;">{{ comentario.conteudo }}</p>
+        <hr style="margin-bottom: 8px; margin-bottom: 8px;">
+      {% endfor %}
+      
+    </div>
+
+  {% else %}
+
+    <p style="margin-left: 1%;"><small>Seja o primeiro a comentar 👇</small></p>
+
+  {% endif %}
+  
+  <div style="margin: 1%;">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.conteudo.errors }}
+      <div class="mb-3">
+        <label for="id_conteudo" class="form-label"></label>
+        <textarea class="form-control" id="id_conteudo" name="conteudo" placeholder="Comente aqui!" required>{{ form_old.conteudo }}</textarea>
+      </div>
+      <p style="text-align:right;">
+        <button class="btn btn-secondary shadow-none btn-sm"  type="submit" style="margin-right:6%;">
+        Comentar
+        </button>
+      </p>
+    </form>
+  </div>
+
+  {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination d-flex justify-content-center">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a style="color: black;font-size:smaller;" href="?page=1">&laquo; primeira</a>
+              <a style="color: black;font-size:smaller;" href="?page={{ page_obj.previous_page_number }}">anterior</a>
+          {% endif %}
+
+          <span class="current">
+              Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a style="color: black;font-size:smaller;" href="?page={{ page_obj.next_page_number }}">próxima</a>
+              <a style="color: black;font-size:smaller;" href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+          {% endif %}
+      </span>
+    </div>
+  {% endif %}
+
+</article>
+<hr style="margin-bottom: 8px; margin-bottom: 8px;">
+{% endblock %}

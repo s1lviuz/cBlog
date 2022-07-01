@@ -1,0 +1,25 @@
+{% extends "registration/baseLogin.html" %}{% load static %}
+
+{% block titulo %}Entrar{% endblock %}
+
+{% block main %}
+
+<form action="." method="post">
+  {% csrf_token %}
+
+    <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
+    <h1 class="h3 mb-4 fw-normal">Conecte-se</h1>
+
+    <div class="form-floating mb-1">
+      {{ form.as_p }}
+    </div>
+
+    <div class="mb-3"></div>
+    
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Entrar</button>
+    <p class="mt-5 mb-3">Novo por aqui? <a href="{% url 'cadastro' %}" class="text-decoration-none">Registre-se</a></p>
+    <p class="mt-5 mb-3 text-muted">© 2022 cBlog, Inc</p>
+    
+</form>
+
+{% endblock %}

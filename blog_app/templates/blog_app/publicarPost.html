@@ -1,0 +1,28 @@
+{% extends "blog_app/baseLogado.html" %}
+{% block titulo %}Novo Post{% endblock %}
+
+{% block main %}
+
+<h3 class="pt-3 fst-italic" style="margin-left:2%;">
+  Novo post
+</h3>
+
+<div style="margin: 1%;">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.conteudo.errors }}
+    <div class="mb-3">
+      <label for="id_conteudo" class="form-label"></label>
+      <textarea class="form-control" id="id_conteudo" name="conteudo" rows="4" placeholder="O que você está pensando?">{{ form_old.conteudo }}</textarea>
+    </div>
+    <p style="text-align:right;">
+      <button class="btn btn-secondary shadow-none btn-sm"  type="submit" style="margin-right:6%;">
+      Publicar
+      </button>
+    </p>
+  </form>
+</div>
+<hr>
+
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends "registration/baseLogin.html" %}{% load static %}
+
+{% block titulo %}Entrar{% endblock %}
+
+{% block main %}
+
+<div>
+  <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
+
+  <h1 class="h3 mb-3 fw-normal">Usuário cadastrado!</h1>
+
+  <div class="mb-3 mt-4"></div>
+    
+  <a href="{% url 'index' %}"><button class="w-100 btn btn-lg btn-dark">Entrar</button></a>
+  <p class="mt-5 mb-3 text-muted">© 2022 cBlog, Inc</p>
+</div>
+
+{% endblock %}

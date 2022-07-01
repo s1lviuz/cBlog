@@ -1,20 +1,33 @@
 {% extends "blog_app/baseLogado.html" %}
-{% block titulo %}Página Inicial{% endblock %}
+{% block titulo %}{{ usuario.get_full_name }} / @{{ usuario.get_username }}{% endblock %}
 
 {% block main %}
 
-<h3 class="mb-4 pt-3 fst-italic" style="margin-left:1%; font-size:xx-large;">
-  Timeline
+<h3 class="mb-2 pt-3 fst-italic" style="margin-left:2%; display: inline-block;">
+  {{ usuario.get_full_name }}
 </h3>
-<hr style="margin-bottom: 8px;">
+
+{% if usuario.get_username != user.get_username and user.is_authenticated %}
+  {% if not segue %}
+    <form method="post" style="float: right; margin-right: 1%;" class="text-decoration-none mb-2 pt-3">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-dark ">Seguir</button>
+    </form>
+  {% else %}
+    <p style="float: right; margin-right: 1%;" class="text-decoration-none mb-2 pt-3">
+      <button class=" btn btn-outline-dark " disabled>Seguindo</button>
+    </p>
+  {% endif %}
+{% endif %}
+
+<hr style="margin-bottom: 8px; ">
 
 {% if object_list %}
 
   {% for post in object_list %}
-    <a href="{% url 'post_detalhes' username=post.autor.get_username pk=post.pk %}" style="text-decoration: none; color: black;">
+    <a href="{% url 'post_detalhes' username=usuario.get_username pk=post.pk %}" style="text-decoration: none; color: black;">
       <article class="blog-post">
         <p class="blog-post-meta" style="display:inline-block; margin-left: 1%; margin-bottom: 1%;">@<strong>{{ post.autor.get_username }}</strong></p>
-        <p class="blog-post-meta pt-1" style="display: inline-block; margin-bottom: 1%; margin-right: 1%;">· {{ post.autor.get_full_name }}</p>
         <p class="blog-post-meta pt-1" style="float: right; font-size:smaller; margin-bottom: 1%; margin-right: 1%;">· <small>{{ post.criado_em }}</small></p>
         <p style="margin-left:4%; margin-right: 4%; padding-bottom: 1%; opacity: 0.87;">{{ post.conteudo }}</p>
       </article>
@@ -42,13 +55,12 @@
     </div>
     <hr style="margin-bottom: 8px; margin-bottom: 8px;">
   {% endif %}
-
+  
 {% else %}
   <article class="blog-post">
-    <h6 style="margin-left: 1%;">Não há publicaçoes, tente seguir alguem.</h6>
+    <h6 style="margin-left: 1%;">Este Usuário não publicou nenhum post ainda.</h6>
   </article>
   <hr style="margin-bottom: 8px; margin-bottom: 8px;">
 {% endif %}
 
 {% endblock %}
-

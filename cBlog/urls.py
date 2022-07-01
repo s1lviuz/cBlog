@@ -13,24 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from django.contrib import admin
-from django.urls import path
-
 from blog_app import views
+from django.contrib import admin
+from django.urls import include, path
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('cadastro/', views.cadastro, name="Cadastro"),
-    path('cadastro/cadastrar/', views.cadastrar, name="Cadastrar"),
-    path('cadastro/sucesso/', views.cadastroSucesso, name="Sucesso"),
-    path('entrar/', views.entrar, name="Login"),
-    path('home/', views.home, name="home"),
-    path('minhaConta/', views.minhaconta, name="Minha Conta" ),
-    path('minhaConta/alterar/', views.alterar, name="Alterar Conta" ),
-    path('sair/', views.sair, name="sair"),
-    path('colaborador/<str:username>/', views.perfilColaborador, name="Perfil Colaborador"),
-    path('publicar/', views.publicarPost, name="Publicar post"),
-
-]
+    path('', RedirectView.as_view(url='home/', permanent=False), name='index'),
+    path('conta/', include('django.contrib.auth.urls')),
+    path('cadastro/', views.UserCreationView.as_view(), name='cadastro'),
+    path('cadastro/sucesso/', views.UserCreationSucessView.as_view(), name='cadastro_sucesso'),
+    path('home/', views.HomePageView.as_view(), name='home'),
+    path('publicar/', views.PostCreationView.as_view(), name='publicar'),
+    path('<str:username>/', views.UserPostsView.as_view(), name='perfil_usuario'),
+    path('<str:username>/<int:pk>/', views.ComentarioCreationView.as_view(), name='post_detalhes'),
+] 

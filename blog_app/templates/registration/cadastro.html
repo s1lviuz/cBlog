@@ -1,0 +1,23 @@
+{% extends "registration/baseLogin.html" %}{% load static %}
+
+{% block titulo %}Cadastro{% endblock %}
+
+{% block main %}
+
+<form method="post">
+  {% csrf_token %}
+  
+    <img class="mb-4" src="{% static 'blog_app/logo_.svg' %}" alt="logo" width="275" height="200">
+    <h1 class="h3 mb-3 fw-normal">Cadastre-se</h1>
+
+    {{ form.as_p }}
+    
+    <div class="mb-3"></div>
+    
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Cadastrar</button>
+    <p class="mt-5 mb-3">Já tem login? <a href="../" class="text-decoration-none">Entre</a></p>
+    <p class="mt-5 mb-3 text-muted">© 2022 cBlog, Inc</p>
+    
+</form>
+
+{% endblock %}
